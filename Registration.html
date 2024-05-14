@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      body {
+        margin-left: 600px;
+        margin-top: 200px;
+      }
+
+      form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 20px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      #errorMessage {
+        margin-top: 10px;
+        font-size: 14px;
+        color: red;
+        display: none;
+      }
+      #homeLink {
+        margin-top: 40px;
+        font-size: 22px;
+        color: red;
+      }
+      #homeLink i {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Registration Form</h2>
+    <form id="registrationForm" action="submit.html" method="POST">
+      <div>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" />
+      </div>
+      <div>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" />
+      </div>
+      <div>
+        <button type="submit">Register</button>
+      </div>
+      <div id="errorMessage" style="color: red; display: none">
+        Please fill out all fields.
+      </div>
+    </form>
+    <div id="homeLink">
+      <a href="Home.html" id="homeLink"
+        ><i class="fa fa-arrow-circle-o-left" style="font-size: 24px"></i>Go
+        back to Home</a
+      >
+    </div>
+    <script>
+      document
+        .getElementById("registrationForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          var firstName = document.getElementById("firstName").value;
+          var lastName = document.getElementById("lastName").value;
+
+          if (firstName !== "" && lastName !== "") {
+            alert("Registration successful!");
+            document.getElementById("registrationForm").reset();
+          } else {
+            document.getElementById("errorMessage").style.display = "block";
+          }
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Page</title>
+    <style>
+      body {
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 8px;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .clear {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        margin-left: 10px;
+      }
+
+      .clear:hover,
+      .clear:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      #errorMessage {
+        margin-top: 10px;
+        font-size: 14px;
+        color: red;
+        display: none;
+      }
+      button {
+        background-color: blue;
+      }
+      #displayText {
+        margin-top: 10px;
+        font-weight: bold;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Centers items horizontally */
+        margin-left: 20px; /* Adjust as needed */
+        margin-right: 20px; /* Adjust as needed */
+        padding: 10px; /* Adds padding inside the card */
+      }
+      .button-container {
+        display: flex;
+        justify-content: center;
+      }
+      .button-container button {
+        margin: 10px;
+        padding: 10px;
+      }
+      #usernameDisplay {
+        display: flex;
+        justify-content: center;
+      }
+      #logoutLink {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        font-size: 22px;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h2><span id="usernameDisplay"></span></h2>
+
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal1')">&times;</span>
+        <h2>First Modal</h2>
+        <form id="form1" onsubmit="return submitForm('modal1', event)">
+          <label for="inputField">Input Field:</label>
+          <input type="text" id="inputField" />
+          <button type="submit">Submit</button>
+          <div id="errorMessage" style="color: red; display: none">
+            Enter password!
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('modal2')">&times;</span>
+        <h2>Second Modal</h2>
+        <img src="image.jpg" />
+        <p><a href="link"></a></p>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button onclick="openModal('modal1')">First Modal</button>
+      <button onclick="openModal('modal2')">Second Modal</button>
+      <a href="Registration.html"><button>Show Registration Form</button></a>
+    </div>
+    <div id="displayText"></div>
+    <div><a href="login.html" id="logoutLink">Logout</a></div>
+
+    <script>
+      var username = localStorage.getItem("username");
+      document.getElementById("usernameDisplay").textContent =
+        "Welcome, " + username;
+
+      var capturedInput = "";
+
+      function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+        resetErrorMessage();
+      }
+
+      function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+        resetErrorMessage();
+      }
+
+      function resetErrorMessage() {
+        document.getElementById("errorMessage").style.display = "none";
+      }
+
+      function submitForm(formId, event) {
+        event.preventDefault();
+        var inputField = document.getElementById("inputField").value;
+        if (inputField === "") {
+          document.getElementById("errorMessage").style.display = "block";
+          return false;
+        }
+
+        capturedInput = inputField;
+
+        closeModal(formId);
+
+        displayText(capturedInput);
+
+        document.getElementById("inputField").value = ""; // Clears the input field
+
+        return true;
+      }
+
+      function displayText(text) {
+        var displayDiv = document.getElementById("displayText");
+        displayDiv.innerHTML =
+          text + '<span class="clear"  onclick="clearText()">&times;</span>';
+      }
+
+      // Function to clear the displayed text
+      function clearText() {
+        var displayDiv = document.getElementById("displayText");
+        displayDiv.innerHTML = ""; // Clear the displayed text
+      }
+
+      // Attach click event listener to the close button
+      document
+        .getElementById("clearTextButton")
+        .addEventListener("click", clearText);
+    </script>
+  </body>
+</html>
