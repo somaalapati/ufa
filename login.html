@@ -78,7 +78,7 @@
       <div id="errorMessage" style="color: red; display: none">
         Invalid password!
       </div>
-      <p>Username: soma; Password: soma.deque</p>
+      <p><i></i>Username: deque Password: deque</i></p>
     </form>
     <script>
       3;
@@ -90,7 +90,7 @@
           var username = document.getElementById("username").value;
           localStorage.setItem("username", username);
 
-          if (password === "soma.deque") {
+          if (password === "deque") {
             window.location.href = "Home.html";
           } else {
             document.getElementById("errorMessage").style.display = "block";
